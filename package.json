@@ -1,0 +1,33 @@
+{
+  "name": "mocha-puppeteer-project",
+  "version": "1.0.0",
+  "description": "Test project to play with key-features of puppeteer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/serhiisobur/mocha-puppeteer-project.git"
+  },
+  "keywords": [
+    "puppeteer",
+    "mocha",
+    "chai",
+    "test-automation"
+  ],
+  "author": "Serhii Sobur",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/serhiisobur/mocha-puppeteer-project/issues"
+  },
+  "homepage": "https://github.com/serhiisobur/mocha-puppeteer-project#readme",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.2.0",
+    "puppeteer": "^3.3.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.0.5"
+  }
+}
