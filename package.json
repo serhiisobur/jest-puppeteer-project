@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npx mocha --timeout=30000 ./specs",
-    "format": "prettier --write \"{specs,helpers}/**/*.{js,md}\""
+    "format": "prettier --write \"{specs,helpers, configs}/**/*.{js,md}\""
   },
   "repository": {
     "type": "git",
