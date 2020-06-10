@@ -4,7 +4,8 @@
   "description": "Test project to play with key-features of puppeteer",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx mocha --timeout=30000 ./specs",
+    "format": "prettier --write \"{specs,helpers}/**/*.{js,md}\""
   },
   "repository": {
     "type": "git",
