@@ -7,8 +7,8 @@ const config = {
   //executablePath: "/Applications/Firefox.app/Contents/MacOS/firefox", //Path to a browser executable to run instead of the bundled Chromium
   //slowMo: 500, //Slows down Puppeteer operations by the specified amount of milliseconds. Useful so that you can see what is going on.
   defaultViewport: {
-    width: 1024, //Page width in pixels.
-    height: 768, //Page height in pixels.
+    width: 1900, //Page width in pixels.
+    height: 1600, //Page height in pixels.
     deviceScaleFactor: 1, //Specify device scale factor (can be thought of as dpr). Defaults to 1.
     isMobile: false, //Whether the meta viewport tag is taken into account. Defaults to false.
     hasTouch: false, //Specifies if viewport supports touch events. Defaults to false
