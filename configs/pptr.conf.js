@@ -3,7 +3,7 @@ const path = require("path");
 const config = {
   product: "chrome", //At this time, this is either chrome or firefox. See also PUPPETEER_PRODUCT.
   ignoreHTTPSErrors: "false", //Whether to ignore HTTPS errors during navigation. Defaults to false.
-  headless: false, //Defaults to true unless the devtools option is true.
+  headless: true, //Defaults to true unless the devtools option is true.
   //executablePath: "/Applications/Firefox.app/Contents/MacOS/firefox", //Path to a browser executable to run instead of the bundled Chromium
   slowMo: 10, //Slows down Puppeteer operations by the specified amount of milliseconds. Useful so that you can see what is going on.
   defaultViewport: {
