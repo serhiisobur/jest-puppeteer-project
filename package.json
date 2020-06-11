@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "format": "prettier --write \"{specs,helpers, configs}/**/*.{js,md}\""
+    "format": "prettier --write \"{specs,utils,configs}/**/*.{js,md}\""
   },
   "repository": {
     "type": "git",

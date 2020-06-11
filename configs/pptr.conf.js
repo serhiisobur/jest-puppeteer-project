@@ -1,11 +1,11 @@
-const path = require('path');
+const path = require("path");
 
 const config = {
   product: "chrome", //At this time, this is either chrome or firefox. See also PUPPETEER_PRODUCT.
   ignoreHTTPSErrors: "false", //Whether to ignore HTTPS errors during navigation. Defaults to false.
   headless: false, //Defaults to true unless the devtools option is true.
   //executablePath: "/Applications/Firefox.app/Contents/MacOS/firefox", //Path to a browser executable to run instead of the bundled Chromium
-  //slowMo: 500, //Slows down Puppeteer operations by the specified amount of milliseconds. Useful so that you can see what is going on.
+  slowMo: 10, //Slows down Puppeteer operations by the specified amount of milliseconds. Useful so that you can see what is going on.
   defaultViewport: {
     width: 1900, //Page width in pixels.
     height: 1600, //Page height in pixels.
@@ -26,6 +26,6 @@ const config = {
   devtools: false, //Whether to auto-open a DevTools panel for each tab. If this option is true, the headless option will be set false.
   pipe: false, //Connects to the browser over a pipe instead of a WebSocket. Defaults to false.
   //extraPrefsFirefox: {} //<Object> Additional preferences that can be passed to Firefox (see PUPPETEER_PRODUCT)
-}
+};
 
 module.exports = config;
