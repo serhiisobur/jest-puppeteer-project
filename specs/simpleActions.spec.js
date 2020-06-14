@@ -2,12 +2,12 @@ const puppeteer = require("puppeteer");
 const config = require("../configs/pptr.conf");
 const url = require("../utils/navigator");
 const chai = require("chai");
-
+const helper = require("../utils/helpers");
 const expect = chai.expect;
 
 const googleUrl = "https://www.google.com.ua/";
 let browser,
-  page = null;
+  page, frame = null;
 
 describe("Check simple actions", () => {
   before(async () => {
@@ -39,24 +39,21 @@ describe("Check simple actions", () => {
   it("should type text", async () => {
     await page.goto(url("autocomplete"));
     await page.waitForSelector(".demo-list");
-    const frameHandle = await page.$(".demo-frame");
-    const frame = await frameHandle.contentFrame();
+    const frame = await helper.handler(page);
     await frame.type(".ui-autocomplete-input", "bla-bla", { delay: 10 });
   });
-  
+
   it("should click button", async () => {
     await page.goto(url("button"));
     await page.waitForSelector(".entry-title");
-    const frameHandle = await page.$(".demo-frame");
-    const frame = await frameHandle.contentFrame();
+    const frame = await helper.handler(page);
     await frame.click(".widget button.ui-button", { clickCount: 1 });
   });
 
   it("should check checkboxradio", async () => {
     await page.goto(url("checkboxradio"));
     await page.waitForSelector(".entry-title");
-    const frameHandle = await page.$(".demo-frame");
-    const frame = await frameHandle.contentFrame();
+    const frame = await helper.handler(page);
     await frame.click('[for="radio-1"]', { clickCount: 1 });
     await frame.waitFor(1000);
     const attr = await frame.evaluate(`document.querySelector("[for='radio-1']").getAttribute("class")`);
