@@ -1,7 +1,15 @@
- const handler = async (page) => {
-  const frameHandle = await page.$(".demo-frame");
-  const frame = await frameHandle.contentFrame();
-  return frame;
-}
+ class Helpers {
 
-exports.handler = handler;
+   async handler(page) {
+     const frameHandle = await page.$(".demo-frame");
+     const frame = await frameHandle.contentFrame();
+     return frame;
+   };
+
+   async navigateTo(page, url) {
+     await page.goto(`https://jqueryui.com/${url}/`);
+     await page.waitForSelector(".entry-title");
+   };
+ }
+
+ module.exports = Helpers;

@@ -1,13 +1,13 @@
 const puppeteer = require("puppeteer");
 const config = require("../configs/pptr.conf");
-const url = require("../utils/navigator");
+const helpers = new (require("../utils/helpers"))();
 const chai = require("chai");
-const helper = require("../utils/helpers");
+const {navigator, handler} = require("../utils/helpers");
 const expect = chai.expect;
 
 const googleUrl = "https://www.google.com.ua/";
 let browser,
-  page, frame = null;
+  page = null;
 
 describe("Check simple actions", () => {
   before(async () => {
@@ -18,16 +18,15 @@ describe("Check simple actions", () => {
   after(async () => await browser.close());
 
   it("should open the browser", async () => {
-    await page.goto(url("demos"));
-    await page.waitForSelector("[id='content']");
-    expect(await page.url()).to.equal(url("demos"));
+    await helpers.navigateTo(page, "demos");
+    expect(await page.url()).to.contain("demos");
   });
 
   it("should go backward", async () => {
     await page.goto(googleUrl);
     await page.waitForSelector("[aria-label='Search']");
     await page.goBack();
-    expect(await page.url()).to.equal(url("demos"));
+    expect(await page.url()).to.contain("demos");
   });
 
   it("should go forward", async () => {
@@ -37,26 +36,27 @@ describe("Check simple actions", () => {
   });
 
   it("should type text", async () => {
-    await page.goto(url("autocomplete"));
-    await page.waitForSelector(".demo-list");
-    const frame = await helper.handler(page);
+    await helpers.navigateTo(page, "autocomplete");
+    const frame = await helpers.handler(page);
     await frame.type(".ui-autocomplete-input", "bla-bla", { delay: 10 });
   });
 
   it("should click button", async () => {
-    await page.goto(url("button"));
-    await page.waitForSelector(".entry-title");
-    const frame = await helper.handler(page);
+    await helpers.navigateTo(page, "button");
+    const frame = await helpers.handler(page);
     await frame.click(".widget button.ui-button", { clickCount: 1 });
   });
 
   it("should check checkboxradio", async () => {
-    await page.goto(url("checkboxradio"));
-    await page.waitForSelector(".entry-title");
-    const frame = await helper.handler(page);
+    await helpers.navigateTo(page, "checkboxradio");
+    const frame = await helpers.handler(page);
     await frame.click('[for="radio-1"]', { clickCount: 1 });
     await frame.waitFor(1000);
     const attr = await frame.evaluate(`document.querySelector("[for='radio-1']").getAttribute("class")`);
     expect(attr).to.contain("ui-checkboxradio-checked");
+  });
+
+  it('should choose option in dropdown', async() => {
+    await helpers.navigateTo(page, "selectmenu");
   });
 });
