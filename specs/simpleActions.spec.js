@@ -2,7 +2,7 @@ const puppeteer = require("puppeteer");
 const config = require("../configs/pptr.conf");
 const helpers = new (require("../utils/helpers"))();
 const chai = require("chai");
-const {navigator, handler} = require("../utils/helpers");
+const { navigator, handler } = require("../utils/helpers");
 const expect = chai.expect;
 
 const googleUrl = "https://www.google.com.ua/";
@@ -35,10 +35,21 @@ describe("Check simple actions", () => {
     expect(await page.url()).to.contain("google");
   });
 
+  it("should get page title", async () => {
+    await helpers.navigateTo(page, "draggable");
+    expect(await page.title()).to.equal("Draggable | jQuery UI");
+  });
+
   it("should type text", async () => {
     await helpers.navigateTo(page, "autocomplete");
     const frame = await helpers.handler(page);
     await frame.type(".ui-autocomplete-input", "bla-bla", { delay: 10 });
+  });
+
+  it("should get text from element", async () => {
+    await helpers.navigateTo(page, "button");
+    const text = await helpers.getText(page, ".entry-title");
+    expect(text).to.equal("Button");
   });
 
   it("should click button", async () => {
@@ -56,7 +67,11 @@ describe("Check simple actions", () => {
     expect(attr).to.contain("ui-checkboxradio-checked");
   });
 
-  it('should choose option in dropdown', async() => {
+  //TODO find working solution
+  it.skip("should choose option in dropdown", async () => {
     await helpers.navigateTo(page, "selectmenu");
+    const frame = await helpers.handler(page);
+    const text = await helpers.getText(frame, "[id='speed-button']");
+    expect(text).to.equal("Slow");
   });
 });
