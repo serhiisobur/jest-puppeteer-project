@@ -72,13 +72,6 @@ describe('Check simple actions', () => {
     expect(attr).to.contain('ui-checkboxradio-checked');
   });
 
-  it('should choose option in dropdown', async () => {
-    const option = 'Both';
-    await page.goto('https://devexpress.github.io/testcafe/example/');
-    await page.waitForSelector('h1');
-    await page.select('[id="preferred-interface"]', option);
-  });
-
   it('should get corect count of elements', async () => {
     await helpers.navigateTo(page, 'selectmenu');
     const frame = await helpers.handler(page);
@@ -86,15 +79,29 @@ describe('Check simple actions', () => {
     expect(count).to.equal(4);
   });
 
+  it('should wait invisibility of element', async () => {
+    const signInBtn = '[id="signin_button"]';
+    await page.goto('http://zero.webappsecurity.com/');
+    await page.click(signInBtn, { clickCount: 1 });
+    await page.waitForSelector(signInBtn, { hidden: true, timeout: 1000 });
+  });
+
+  it('should choose option in dropdown', async () => {
+    const option = 'Both';
+    await page.goto('https://devexpress.github.io/testcafe/example/');
+    await page.waitForSelector('h1');
+    await page.select('[id="preferred-interface"]', option);
+  });
+
   it('should simulate keyboard pressing', async () => {
     const selector = '[id="searchTerm"]';
     await page.goto('http://zero.webappsecurity.com/');
     await page.waitForSelector(selector);
     await page.focus(selector);
-    await page.keyboard.type('Hello world', {delay: 100});
+    await page.keyboard.type('Hello world', { delay: 100 });
     await page.keyboard.press('Enter');
     await page.waitForSelector('.row-divider');
     const url = await page.url();
-    expect(url).to.contains("Hello+world")
+    expect(url).to.contains('Hello+world');
   });
 });
