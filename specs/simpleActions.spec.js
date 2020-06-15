@@ -67,11 +67,10 @@ describe("Check simple actions", () => {
     expect(attr).to.contain("ui-checkboxradio-checked");
   });
 
-  //TODO find working solution
-  it.skip("should choose option in dropdown", async () => {
-    await helpers.navigateTo(page, "selectmenu");
-    const frame = await helpers.handler(page);
-    const text = await helpers.getText(frame, "[id='speed-button']");
-    expect(text).to.equal("Slow");
+  it("should choose option in dropdown", async () => {
+    const option = "Both"
+    await page.goto("https://devexpress.github.io/testcafe/example/");
+    await page.waitForSelector("h1");
+    await page.select("[id='preferred-interface']", option);
   });
 });
