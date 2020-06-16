@@ -6,7 +6,7 @@ module.exports = {
   package: './package.json',
   reporter: 'spec',
   slow: 75,
-  timeout: 5000,
+  timeout: 10000,
   ui: 'bdd',
   'watch-files': ['specs/**/*.js'],
 };
