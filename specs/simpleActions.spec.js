@@ -65,7 +65,7 @@ describe('Check simple actions', () => {
     await click(frame, '.widget button.ui-button');
   });
 
-  it.only('should check checkboxradio', async () => {
+  it('should check checkboxradio', async () => {
     await navigateTo(page, 'checkboxradio');
     const frame = await handler(page);
     await click(frame, '[for="radio-1"]');
