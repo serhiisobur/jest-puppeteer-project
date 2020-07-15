@@ -4,7 +4,7 @@
   "description": "Test project to play with key-features of puppeteer",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --reporter mochawesome",
     "format": "prettier --write \"{specs,utils,configs}/**/*.{js,md}\""
   },
   "repository": {
@@ -26,9 +26,10 @@
   "dependencies": {
     "chai": "^4.2.0",
     "mocha": "^8.0.1",
-    "puppeteer": "^5.1.0"
+    "puppeteer": "^5.0.1"
   },
   "devDependencies": {
+    "mochawesome": "^6.1.1",
     "prettier": "^2.0.5"
   }
 }

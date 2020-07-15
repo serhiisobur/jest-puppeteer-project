@@ -1,6 +1,14 @@
 module.exports = {
   diff: true,
-  parallel: true,
+  parallel: false,
+  reporter: 'mochawesome',
+  'reporter-option': [
+    'overwrite=true',
+    'reportDir=reports',
+    'reportFilename=report',
+    'reportTitle=My\ Custom\ Title',
+    'showPassed=false'
+],
   spec: ["./specs/**/*.js"],
   extension: ['js'],
   package: './package.json',
