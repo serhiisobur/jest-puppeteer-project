@@ -1,8 +1,6 @@
 const puppeteer = require('puppeteer');
 const config = require('../configs/pptr.conf');
-const helpers = new (require('../utils/helpers'))();
 const expect = require('chai').expect;
-const { navigator, handler } = require('../utils/helpers');
 
 let browser,
   page = null;
