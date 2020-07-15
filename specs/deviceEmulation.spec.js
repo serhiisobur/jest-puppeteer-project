@@ -6,7 +6,6 @@ const { navigator, handler } = require('../utils/helpers');
 
 let browser,
   page = null;
-
 const iPhone = puppeteer.devices['iPhone 6'];
 const iPad = puppeteer.devices['iPad'];
 

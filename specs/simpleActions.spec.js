@@ -4,7 +4,8 @@ const helpers = new (require('../utils/helpers'))();
 const expect = require('chai').expect;
 const { navigator, handler } = require('../utils/helpers');
 
-const googleUrl = 'https://www.google.com.ua/';
+const url = 'https://github.com/';
+const searchField = '[role="search"]';
 let browser,
   page = null;
 
@@ -22,16 +23,20 @@ describe('Check simple actions', () => {
   });
 
   it('should go backward', async () => {
-    await page.goto(googleUrl);
-    await page.waitForSelector('[aria-label="Search"]');
-    await page.goBack();
-    expect(await page.url()).to.contain('demos');
+    await page.goto(url);
+    await page.waitForSelector(searchField);
+    await helpers.navigateTo(page, 'demos');
+    await page.goBack({ waitUntil: 'networkidle0' });
+    expect(await page.url()).to.contain('github');
   });
 
   it('should go forward', async () => {
+    await helpers.navigateTo(page, 'demos');
+    await page.goto(url);
+    await page.waitForSelector(searchField);
+    await page.goBack({ waitUntil: 'networkidle0' });
     await page.goForward();
-    await page.waitForSelector('[aria-label="Search"]');
-    expect(await page.url()).to.contain('google');
+    expect(await page.url()).to.contain('github');
   });
 
   it('should get page title', async () => {
@@ -56,17 +61,13 @@ describe('Check simple actions', () => {
   it('should click button', async () => {
     await helpers.navigateTo(page, 'button');
     const frame = await helpers.handler(page);
-    await frame.click('.widget button.ui-button', {
-      clickCount: 1,
-    });
+    await helpers.click(frame, '.widget button.ui-button');
   });
 
   it('should check checkboxradio', async () => {
     await helpers.navigateTo(page, 'checkboxradio');
     const frame = await helpers.handler(page);
-    await frame.click('[for="radio-1"]', {
-      clickCount: 1,
-    });
+    await helpers.click(frame, '[for="radio-1"]');
     await frame.waitFor(1000);
     const attr = await frame.evaluate(`document.querySelector('[for="radio-1"]').getAttribute('class')`);
     expect(attr).to.contain('ui-checkboxradio-checked');
@@ -82,7 +83,7 @@ describe('Check simple actions', () => {
   it('should wait invisibility of element', async () => {
     const signInBtn = '[id="signin_button"]';
     await page.goto('http://zero.webappsecurity.com/');
-    await page.click(signInBtn, { clickCount: 1 });
+    await helpers.click(page, signInBtn);
     await page.waitForSelector(signInBtn, { hidden: true, timeout: 1000 });
   });
 

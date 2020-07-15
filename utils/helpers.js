@@ -11,11 +11,30 @@ class Helpers {
   }
 
   async getText(context, selector) {
-    return context.$eval(selector, (element) => element.textContent);
+    try {
+      await await context.waitForSelector(selector);
+      return await context.$eval(selector, (element) => element.textContent);
+    } catch (error) {
+      throw new Error(`Can not get text from element with selector - ${selector}`);
+    }
   }
 
   async getElementsCount(context, selector) {
-    return context.$$eval(selector, (element) => element.length);
+    try {
+      await context.waitForSelector(selector);
+      return await context.$$eval(selector, (element) => element.length);
+    } catch (error) {
+      throw new Error(`Can not get count of elements with selector - ${selector}`);
+    }
+  }
+
+  async click(context, selector, count = 1) {
+    try {
+      await context.waitForSelector(selector);
+      await context.click(selector, { clickCount: count });
+    } catch (error) {
+      throw new Error(`Could not click on selector - ${selector}`);
+    }
   }
 }
 
