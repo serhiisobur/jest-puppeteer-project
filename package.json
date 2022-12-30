@@ -25,7 +25,7 @@
   "homepage": "https://github.com/serhiisobur/mocha-puppeteer-project#readme",
   "dependencies": {
     "chai": "^4.2.0",
-    "mocha": "^8.0.1",
+    "mocha": "^8.4.0",
     "puppeteer": "^5.0.1"
   },
   "devDependencies": {
